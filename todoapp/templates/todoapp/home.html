@@ -1,0 +1,50 @@
+{% comment %} <form method =POST>
+{% csrf_token %}
+{{form}}
+<button type= 'submit'>submit</button>
+</form>
+
+{% for task in task %}
+<p>{{task.task}}</p>
+
+<a href = '{% url 'edit' task.id %}'><button>Edit</button></a>
+<a href = '{% url 'delete' task.id %}'><button>Delete</button></a>
+{% endfor %} {% endcomment %}
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoApp</title>
+    <link rel = 'stylesheet' href = "{% static 'style.css' %}">
+</head>
+<body>
+    <div id = 'container'>
+        <div id = 'formContainer'>
+            <form method="POST">
+                {% csrf_token %}
+                {{form.task}}
+                <button id = 'add' type = 'submit'>add</button>
+            </form>
+        </div>
+        <div id = 'todoItems'>
+            {% for task in task %}
+                <div class = 'item'>
+                    <p>{{task.task}}</p>
+                    <div class = 'controls'>
+                        <a href = "{% url 'edit' task.id %}"><button class = 'edit'>Edit</button></a>
+                        <a href = "{% url 'delete' task.id %}"><button class = 'delete'>Delete</button></a>
+                    </div>
+                </div>
+                {% endfor %}
+
+              
+                
+                
+            
+        </div>
+    </div>
+</body>
+</html>
